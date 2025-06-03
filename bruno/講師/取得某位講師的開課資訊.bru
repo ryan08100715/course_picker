@@ -1,0 +1,11 @@
+meta {
+  name: 取得某位講師的開課資訊
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{host}}/api/instructors/1/courses
+  body: none
+  auth: inherit
+}
