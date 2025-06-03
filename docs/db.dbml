@@ -1,0 +1,56 @@
+Table instructors {
+	id bigint [ pk, increment, not null ]
+	account varchar [ not null, unique, note: '講師帳號' ]
+	password varchar [ not null, note: '儲存Hash後的密碼' ]
+	name varchar [ not null, note: '講師名稱' ]
+	email varchar [ not null, note: '講師信箱' ]
+	created_at timestamp [ not null ]
+	updated_at timestamp [ not null ]
+
+	Note: '講師資料表'
+}
+
+Table courses {
+	id bigint [ pk, increment, not null ]
+	name varchar [ not null, note: '課程名稱' ]
+	description varchar [ note: '課程描述' ]
+	start_time time [ not null, note: '上課時間' ]
+	end_time time [ not null, note: '下課時間' ]
+	created_at timestamp [ not null ]
+	updated_at timestamp [ not null ]
+	instructor_id bigint [ not null, note: '講師ID' ]
+
+	indexes {
+		(instructor_id) [ name: 'courses_index_0' ]
+	}
+
+	Note: '課程資料表'
+}
+
+Table students {
+	id bigint [ pk, increment, not null ]
+	account varchar [ not null, unique ]
+	password varchar [ not null, note: '儲存Hash後的密碼' ]
+	name varchar [ not null ]
+
+	Note: '學生資料表'
+}
+
+Table course_student {
+	student_id bigint [ pk, not null ]
+	course_id bigint [ pk, not null ]
+	created_at timestamp [ not null ]
+	updated_at timestamp [ not null ]
+}
+
+Ref fk_instructors_id_courses {
+	instructors.id < courses.instructor_id [ delete: no action, update: no action ]
+}
+
+Ref fk_students_id_course_student {
+	students.id < course_student.student_id [ delete: no action, update: no action ]
+}
+
+Ref fk_courses_id_course_student {
+	courses.id < course_student.course_id [ delete: no action, update: no action ]
+}
