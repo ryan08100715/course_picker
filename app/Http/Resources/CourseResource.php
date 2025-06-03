@@ -18,7 +18,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
             'end_time' => $this->end_time,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
-            'instructor_id' => $this->instructor_id,
+            'instructor' => $this->whenLoaded('instructor'),
         ];
     }
 }

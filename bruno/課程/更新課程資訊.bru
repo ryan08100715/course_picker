@@ -6,6 +6,16 @@ meta {
 
 put {
   url: {{host}}/api/courses/1
-  body: none
+  body: json
   auth: inherit
+}
+
+body:json {
+  {
+    "name": "PHP 新手教學",
+    "description": null,
+    "start_time": "1300",
+    "end_time": "1400",
+    "instructor_id": 1
+  }
 }

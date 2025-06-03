@@ -1,10 +1,13 @@
 <?php
 
-Route::get('/courses', fn () => '取得所有課程資訊');
-Route::post('/courses', fn () => '新增課程');
-Route::put('/courses/{course}', fn () => '更新課程資訊');
-Route::delete('/courses/{course}', fn () => '刪除課程');
+use App\Http\Controllers\CourseController;
+use App\Http\Controllers\InstructorController;
 
-Route::get('/instructors', fn () => '取得所有講師資訊');
-Route::post('/instructors', fn () => '新增講師');
-Route::get('/instructors/{instructor}/courses', fn () => '取得某位講師的開課資訊');
+Route::get('/courses', [CourseController::class, 'index']);
+Route::post('/courses', [CourseController::class, 'store']);
+Route::put('/courses/{course}', [CourseController::class, 'update']);
+Route::delete('/courses/{course}', [CourseController::class, 'destroy']);
+
+Route::get('/instructors', [InstructorController::class, 'index']);
+Route::post('/instructors', [InstructorController::class, 'store']);
+Route::get('/instructors/{instructor}/courses', [InstructorController::class, 'courseIndex']);
